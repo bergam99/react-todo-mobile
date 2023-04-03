@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Noto+Sans+Limbu&family=Noto+Serif+Khojki&family=PT+Serif:wght@400;700&family=Playfair+Display:ital@1&family=Poppins:wght@100;400&family=Quicksand&family=Roboto:ital,wght@0,700;0,900;1,500&display=swap');
+/* font-family: 'Quicksand', sans-serif; */
+
+/* normalize */
+*, body, html{
+  padding: 0;
+  margin: 0;
+  list-style:none;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  background-color:var(--color-dark-navy);
+  color:white;
+}
+button{
+  all:unset;
+}
+
+img{
+  display:block;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* fond */
+body{
+  background-color: var(--color-gray);
+}
+
+/* color library */
+:root{
+  --color-dark-navy : #040722;
+  --color-light-navy : #1D2038;
+  --color-pink : #E475F1;
+  --color-yellow : #F3D24F;
+  --color-blue : #64A7D9;
+  --color-green : #88E7A1;
+}
