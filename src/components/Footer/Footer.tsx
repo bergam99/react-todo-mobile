@@ -1,20 +1,46 @@
-import { NavLink } from "react-router-dom";
-import { HashRouter, Route } from "react-router-dom";
-import AddTask from "../../pages/Add-task/AddTask";
-import History from "../../pages/History/History";
-import Home from "../../pages/Home/Home";
 import { Link } from "react-router-dom";
+import "./Footer.css";
 
 const Footer = () => {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/AddTask">+</Link>
-        <Link to="History">History</Link>
+      <ul className="Footer">
+        <Link to="/">
+          <li className="Footer__li">
+            <button className="Footer__buttons">
+                <img
+                  className="Footer__img"
+                  src="public/vector-icon/home.png"
+                  alt="home"
+                />
+            </button>
+          </li>
+        </Link>
 
+        <Link to="/AddTask">
+          <li className="Footer__li">
+            <button>
+                <img
+                  className="Footer__img"
+                  src="public/vector-icon/add.png"
+                  alt="add"
+                />
+            </button>
+          </li>
+        </Link>
 
-      </nav>
+        <Link to="History">
+          <li className="Footer__li">
+            <button>
+                <img
+                  className="Footer__img"
+                  src="public/vector-icon/history.png"
+                  alt="history"
+                />
+            </button>
+          </li>
+        </Link>
+      </ul>
     </>
   );
 };

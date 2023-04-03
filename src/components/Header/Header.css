@@ -1,0 +1,14 @@
+.header {
+    height: 70px;
+    border-bottom: 1px white solid;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+  
+  }
+  
+  h4 {
+    margin-left: 26px;
+  }
+  

@@ -1,0 +1,31 @@
+.Footer {
+    height: 100px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    border-top: 1px white solid;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.Footer .Footer__li {
+    position: relative;
+    width: 66px;
+    height: 66px;
+    border-radius: 50px;
+
+}
+
+
+.Footer .Footer__li .Footer__img {
+    width: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
