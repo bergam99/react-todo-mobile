@@ -42,12 +42,23 @@
 
 // export default TodoContext;
 
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-type FormData = {
-  name: string;
-  email: string;
+export type FormType = 
+| "shopping"
+| "health"
+| "work"
+| "bills"
+| "cleaning"
+| "other";
+
+export type FormData = {
+  id: number;
+  content: string;
+  category: FormType | null;
+  isUrgent: boolean;
+  doneDate: Date | null;
 }
 type FormProviderProps = {
   children: React.ReactNode;
@@ -59,7 +70,7 @@ type FormContextValue = {
   setFormData: (data: FormData) => void;
 }
 
-const initialFormData: FormData = { name: "", email: "" };
+const initialFormData: FormData = { id:  Date.now(), content: "", category: null, isUrgent: false, doneDate: null};
 
 const FormContext = createContext<FormContextValue>({
   formData: initialFormData,
@@ -69,6 +80,8 @@ const FormContext = createContext<FormContextValue>({
 export const useFormContext = () => useContext(FormContext);
 
 export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
+  const [todoList, setTodoList] = useState<FormData[]>([]);
+
   const [formData, setFormData] = useLocalStorage<FormData>(
     "form-data",
     initialFormData

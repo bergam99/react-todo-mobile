@@ -1,134 +1,140 @@
 import { useState } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import "./AddTask.css";
-interface FormData {
-  name: string;
-  email: string;
-}
-
-// export const useLocalStorage = <T extends unknown>(
-//   key: string,
-//   initialValue: T
-// ) => {
-//   const [storedValue, setStoredValue] = useState<T>(() => {
-//     const item = window.localStorage.getItem(key);
-//     return item ? (JSON.parse(item) as T) : initialValue;
-//   });
-
-//   const setValue = (value: T) => {
-//     setStoredValue(value);
-//     window.localStorage.setItem(key, JSON.stringify(value));
-//   };
-
-//   return [storedValue, setValue] as const;
-// };
-
-
-
-// const TodoForm = () => {
-//   const [todoItem, setTodoItem] = useState<FormData>({
-//     id: 0,
-//     content: "",
-//     category: null,
-//     isUrgent: false,
-//     doneDate: null,
-//   });
-//   const [todoList, setTodoList] = useLocalStorage<FormData[]>("todo-list", []);
-
-//   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-//     event.preventDefault();
-//     setTodoList([...todoList, todoItem]);
-//   };
-
-//   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = event.target;
-//     setTodoItem((prevTodoItem) => ({ ...prevTodoItem, [name]: value }));
-//   };
-
-//   const handleCheckboxChange = (
-//     event: React.ChangeEvent<HTMLInputElement>
-//   ) => {
-//     const { name, checked } = event.target;
-//     setTodoItem((prevTodoItem) => ({ ...prevTodoItem, [name]: checked }));
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label>
-//         Content:
-//         <input
-//           type="text"
-//           name="content"
-//           value={todoItem.content}
-//           onChange={handleChange}
-//         />
-//       </label>
-//       <label>
-//         Category:
-//         <select name="category" value={TodoItem.category} onChange={handleChange}>
-//           <option value="">Select a category</option>
-//           <option value="shopping">Shopping</option>
-//           <option value="health">Health</option>
-//           <option value="work">Work</option>
-//           <option value="bills">Bills</option>
-//           <option value="cleaning">Cleaning</option>
-//           <option value="other">Other</option>
-//         </select>
-//       </label>
-//       <label>
-//         Is urgent:
-//         <input
-//           type="checkbox"
-//           name="isUrgent"
-//           checked={todoItem.isUrgent}
-//           onChange={handleCheckboxChange}
-//         />
-//       </label>
-//       <button type="submit">Add Todo</button>
-//     </form>
-//   );
-// };
-
-
-
+import { FormType, useFormContext } from "../../context/TodoContext";
+import { FormData } from "../../context/TodoContext";
 
 const Form = () => {
-  const [formData, setFormData] = useState<FormData>({ name: "", email: "" });
+  const [formData, setFormData] = useState<FormData>({
+    id: Date.now(),
+    content: "",
+    category: null,
+    isUrgent: false,
+    doneDate: null,
+  });
   const [storedFormData, setStoredFormData] = useLocalStorage<FormData>(
     "form-data",
-    { name: "", email: "" }
+    {
+      id: Date.now(),
+      content: "",
+      category: null,
+      isUrgent: false,
+      doneDate: null,
+    }
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStoredFormData(formData);
+    // reset value
+    setFormData({
+      id: Date.now(),
+      content: "",
+      category: null,
+      isUrgent: false,
+      doneDate: null,
+    });
   };
 
+
+// input
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
+
   return (
     <form onSubmit={handleSubmit} className="AddTask">
+<label>
+  Category:
+  <div>
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="shopping"
+        checked={formData.category === "shopping"}
+        onChange={handleChange}
+      />
+      Shopping
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="health"
+        checked={formData.category === "health"}
+        onChange={handleChange}
+      />
+      Health
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="work"
+        checked={formData.category === "work"}
+        onChange={handleChange}
+      />
+      Work
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="bills"
+        checked={formData.category === "bills"}
+        onChange={handleChange}
+      />
+      Bills
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="cleaning"
+        checked={formData.category === "cleaning"}
+        onChange={handleChange}
+      />
+      Cleaning
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="other"
+        checked={formData.category === "other"}
+        onChange={handleChange}
+      />
+      Other
+    </label>
+  </div>
+</label>
       <label>
-        Name:
+        textarea:
         <input
-          type="text"
-          name="name"
-          value={formData.name}
+          type="textarea"
+          name="content"
+          value={formData.content}
           onChange={handleChange}
         />
       </label>
       <label>
-        Email:
+        isUrgent:
         <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
+          type="checkbox"
+          name="isUrgent"
+          checked={formData.isUrgent}
+          onChange={(event) =>
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              isUrgent: event.target.checked,
+            }))
+          }
         />
       </label>
+
       <button type="submit">Submit</button>
     </form>
   );
