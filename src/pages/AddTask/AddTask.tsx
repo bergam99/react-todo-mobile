@@ -4,6 +4,7 @@ import "./AddTask.css";
 import { FormType, useFormContext } from "../../context/TodoContext";
 import { FormData } from "../../context/TodoContext";
 
+// reset
 const DEFAULT_FORM_DATA = {
   id: Date.now(),
   content: "",
@@ -12,7 +13,7 @@ const DEFAULT_FORM_DATA = {
   doneDate: null,
 };
 
-const Form = () => {
+const AddTask = () => {
   const [formData, setFormData] = useState<FormData>(DEFAULT_FORM_DATA);
   const [storedFormData, setStoredFormData] = useLocalStorage<FormData[]>(
     "form-data",
@@ -45,7 +46,7 @@ const Form = () => {
               checked={formData.category === "shopping"}
               onChange={handleChange}
             />
-            Shopping
+            🛍️
           </label>
           <label>
             <input
@@ -55,7 +56,7 @@ const Form = () => {
               checked={formData.category === "health"}
               onChange={handleChange}
             />
-            Health
+            💊️
           </label>
           <label>
             <input
@@ -65,7 +66,7 @@ const Form = () => {
               checked={formData.category === "work"}
               onChange={handleChange}
             />
-            Work
+            💼
           </label>
           <label>
             <input
@@ -75,7 +76,7 @@ const Form = () => {
               checked={formData.category === "bills"}
               onChange={handleChange}
             />
-            Bills
+            💸
           </label>
           <label>
             <input
@@ -85,7 +86,7 @@ const Form = () => {
               checked={formData.category === "cleaning"}
               onChange={handleChange}
             />
-            Cleaning
+            🧼
           </label>
           <label>
             <input
@@ -95,12 +96,12 @@ const Form = () => {
               checked={formData.category === "other"}
               onChange={handleChange}
             />
-            Other
+            🤷‍♀️
           </label>
         </div>
       </label>
       <label>
-        textarea:
+        Quelle tâche avez vous à effectuer ?
         <input
           type="textarea"
           name="content"
@@ -108,24 +109,25 @@ const Form = () => {
           onChange={handleChange}
         />
       </label>
-      <label>
-        isUrgent:
-        <input
-          type="checkbox"
-          name="isUrgent"
-          checked={formData.isUrgent}
-          onChange={(event) =>
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              isUrgent: event.target.checked,
-            }))
-          }
-        />
-      </label>
+      <br />
+
+      <input
+        type="checkbox"
+        name="isUrgent"
+        checked={formData.isUrgent}
+        onChange={(event) =>
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            isUrgent: event.target.checked,
+          }))
+        }
+      />
+      <label>La tâche est urgente ⚠️</label>
+      <br />
 
       <button type="submit">Submit</button>
     </form>
   );
 };
 
-export default Form;
+export default AddTask;

@@ -25,7 +25,7 @@ type FormContextValue = {
   setFormData: (data: FormData) => void;
 };
 
-const initialFormData: FormData = {
+const INITIAL_FORMDATA: FormData = {
   id: Date.now(),
   content: "",
   category: null,
@@ -33,22 +33,24 @@ const initialFormData: FormData = {
   doneDate: null,
 };
 
-const FormContext = createContext<FormContextValue>({
-  formData: initialFormData,
+const FORM_CONTEXT = createContext<FormContextValue>({
+  formData: INITIAL_FORMDATA,
   setFormData: () => {},
 });
 
-export const useFormContext = () => useContext(FormContext);
+export const useFormContext = () => useContext(FORM_CONTEXT);
 
 export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
-  const [todoList, setTodoList] = useState<FormData[]>([]);
+  // const [todoList, setTodoList] = useState<FormData[]>([]);
 
   const [formData, setFormData] = useLocalStorage<FormData>(
     "form-data",
-    initialFormData
+    INITIAL_FORMDATA
   );
 
   const value = { formData, setFormData };
 
-  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
+  return (
+    <FORM_CONTEXT.Provider value={value}>{children}</FORM_CONTEXT.Provider>
+  );
 };
