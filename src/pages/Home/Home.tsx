@@ -1,9 +1,17 @@
-import React from 'react'
-import './Home.css'
-const home = () => {
-  return (
-    <div className="Home">home</div>
-  )
-}
+import React from "react";
+import "./Home.css";
+import { useFormContext } from "../../context/TodoContext";
 
-export default home
+const home = () => {
+  const { formData } = useFormContext();
+  return (
+    <>
+      <div className="Home">
+        <h2>Form valuessssss</h2>
+        {/* <p>{formData}</p> */}
+      </div>
+    </>
+  );
+};
+
+export default home;

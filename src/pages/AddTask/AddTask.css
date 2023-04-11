@@ -2,3 +2,57 @@
   padding: 107px 26px 100px 26px;
 
 }
+
+/* .AddTask__icon_input{
+  opacity: 0;
+} */
+
+.AddTask__textarea::placeholder {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.AddTask__textarea {
+  line-height: 20px; /* ajuste la hauteur de ligne */
+  border: none;
+  background-color:var(--color-light-navy);
+  margin-top: 28px;
+  margin-bottom: 31px;
+  width: 338px;
+  height: 182px;
+
+}
+
+.AddTask__textarea:focus {
+  outline: none; /* supprime la mise en évidence du focus */
+}
+.AddTask__icons {
+  display: flex;
+  padding: 30px 0 38px 0;
+  justify-content: center;
+  gap: 16px;
+}
+
+.AddTask__icon_label, .AddTask__icon_input{
+  padding: 6px 16px 6px 16px;
+  border-radius: 50px;
+}
+
+/* unchecked label styles */
+.AddTask__icon_label {
+  /* ... other styles ... */
+  background-color: var(--color-light-navy);
+}
+
+/* checked label styles */
+.AddTask__icon_label input[type="checkbox"]:checked + span {
+  background-color: red;
+}
+
+/* toggle */
+.AddTask__icon_label:hover {
+  background-color: var(--color-yellow);
+}
+.AddTask__icon_label a:active {
+  background-color: var(--color-yellow);
+}
