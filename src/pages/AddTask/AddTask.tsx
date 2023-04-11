@@ -44,17 +44,18 @@ const AddTask = () => {
     <>
       <main className="AddTask">
         {" "}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <label>
-            Category:
+            Sélectionnez votre catégorie* :
             <div className="AddTask__icons">
               <label htmlFor="shopping" className="AddTask__icon_label">
                 <input
                   className="AddTask__icon_input"
                   id="shopping"
-                  type="checkbox"
+                  type="radio"
                   name="category"
-                  value="shopping"
+                  value="🛍️"
+                  required
                   checked={formData.category === "shopping"}
                   onChange={handleChange}
                 />
@@ -64,9 +65,10 @@ const AddTask = () => {
                 <input
                   className="AddTask__icon_input"
                   id="health"
-                  type="checkbox"
+                  type="radio"
                   name="category"
-                  value="health"
+                  value="💊️"
+                  required
                   checked={formData.category === "health"}
                   onChange={handleChange}
                 />
@@ -76,9 +78,10 @@ const AddTask = () => {
                 <input
                   className="AddTask__icon_input"
                   id="work"
-                  type="checkbox"
+                  type="radio"
                   name="category"
-                  value="work"
+                  value="💼"
+                  required
                   checked={formData.category === "work"}
                   onChange={handleChange}
                 />
@@ -88,9 +91,10 @@ const AddTask = () => {
                 <input
                   className="AddTask__icon_input"
                   id="bills"
-                  type="checkbox"
+                  type="radio"
                   name="category"
-                  value="bills"
+                  value="💸"
+                  required
                   checked={formData.category === "bills"}
                   onChange={handleChange}
                 />
@@ -100,9 +104,10 @@ const AddTask = () => {
                 <input
                   className="AddTask__icon_input"
                   id="cleaning"
-                  type="checkbox"
+                  type="radio"
                   name="category"
-                  value="cleaning"
+                  value="🧼"
+                  required
                   checked={formData.category === "cleaning"}
                   onChange={handleChange}
                 />
@@ -112,9 +117,10 @@ const AddTask = () => {
                 <input
                   className="AddTask__icon_input"
                   id="cleaning"
-                  type="checkbox"
+                  type="radio"
                   name="category"
-                  value="other"
+                  value="🤷‍♀️"
+                  required
                   checked={formData.category === "other"}
                   onChange={handleChange}
                 />
@@ -129,6 +135,7 @@ const AddTask = () => {
               // type="textarea"
               placeholder="Exemple : Faire les courses"
               name="content"
+              required
               value={formData.content}
               onChange={handleChangeTextArea}
             />

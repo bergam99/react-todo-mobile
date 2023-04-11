@@ -11,6 +11,11 @@
   background-color:var(--color-dark-navy);
   color:white;
 }
+
+
+textarea {
+  resize: none;
+}
 button{
   all:unset;
 }
