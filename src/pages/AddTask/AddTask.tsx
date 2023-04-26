@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import "./AddTask.css";
-import { FormType, useFormContext } from "../../context/TodoContext";
-import { FormData } from "../../context/TodoContext";
+import {
+  CategoryOfTodoFormType,
+  useFormContext,
+} from "../../context/TodoContext";
+import { TodoFormType } from "../../context/TodoContext";
 
 // reset
 const DEFAULT_FORM_DATA = {
@@ -14,30 +17,31 @@ const DEFAULT_FORM_DATA = {
 };
 
 const AddTask = () => {
-  const [formData, setFormData] = useState<FormData>(DEFAULT_FORM_DATA);
-  const [storedFormData, setStoredFormData] = useLocalStorage<FormData[]>(
+  const [todoFormType, setTodoFormType] =
+    useState<TodoFormType>(DEFAULT_FORM_DATA);
+  const [storedFormData, setStoredFormData] = useLocalStorage<TodoFormType[]>(
     "form-data",
     []
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStoredFormData([...storedFormData, formData]);
+    setStoredFormData([...storedFormData, todoFormType]);
     // reset value
-    setFormData(DEFAULT_FORM_DATA);
+    setTodoFormType(DEFAULT_FORM_DATA);
   };
 
   // input
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setTodoFormType((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
   // textarea
   const handleChangeTextArea = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setTodoFormType((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   return (
@@ -56,7 +60,7 @@ const AddTask = () => {
                   name="category"
                   value="🛍️"
                   required
-                  checked={formData.category === "shopping"}
+                  checked={todoFormType.category === "shopping"}
                   onChange={handleChange}
                 />
                 🛍️
@@ -69,7 +73,7 @@ const AddTask = () => {
                   name="category"
                   value="💊️"
                   required
-                  checked={formData.category === "health"}
+                  checked={todoFormType.category === "health"}
                   onChange={handleChange}
                 />
                 💊️
@@ -82,7 +86,7 @@ const AddTask = () => {
                   name="category"
                   value="💼"
                   required
-                  checked={formData.category === "work"}
+                  checked={todoFormType.category === "work"}
                   onChange={handleChange}
                 />
                 💼
@@ -95,7 +99,7 @@ const AddTask = () => {
                   name="category"
                   value="💸"
                   required
-                  checked={formData.category === "bills"}
+                  checked={todoFormType.category === "bills"}
                   onChange={handleChange}
                 />
                 💸
@@ -108,7 +112,7 @@ const AddTask = () => {
                   name="category"
                   value="🧼"
                   required
-                  checked={formData.category === "cleaning"}
+                  checked={todoFormType.category === "cleaning"}
                   onChange={handleChange}
                 />
                 🧼
@@ -121,7 +125,7 @@ const AddTask = () => {
                   name="category"
                   value="🤷‍♀️"
                   required
-                  checked={formData.category === "other"}
+                  checked={todoFormType.category === "other"}
                   onChange={handleChange}
                 />
                 🤷‍♀️
@@ -136,7 +140,7 @@ const AddTask = () => {
               placeholder="Exemple : Faire les courses"
               name="content"
               required
-              value={formData.content}
+              value={todoFormType.content}
               onChange={handleChangeTextArea}
             />
           </label>
@@ -145,9 +149,9 @@ const AddTask = () => {
           <input
             type="checkbox"
             name="isUrgent"
-            checked={formData.isUrgent}
+            checked={todoFormType.isUrgent}
             onChange={(event) =>
-              setFormData((prevFormData) => ({
+              setTodoFormType((prevFormData) => ({
                 ...prevFormData,
                 isUrgent: event.target.checked,
               }))

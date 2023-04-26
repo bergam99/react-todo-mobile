@@ -29,10 +29,6 @@ a{
   text-decoration:none;
 }
 
-/* fond */
-body{
-  background-color: var(--color-gray);
-}
 
 /* color library */
 :root{
