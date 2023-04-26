@@ -12,7 +12,7 @@
 }
 
 
-.Footer .Footer__li {
+.Footer .Footer__button {
     position: relative;
     width: 66px;
     height: 66px;
@@ -21,7 +21,7 @@
 }
 
 
-.Footer .Footer__li .Footer__img {
+.Footer .Footer__button .Footer__img {
     width: 30px;
     position: absolute;
     top: 50%;
