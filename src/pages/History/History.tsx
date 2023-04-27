@@ -1,10 +1,29 @@
-import React from 'react'
-import './History.css'
+import React from "react";
+import "./History.css";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { TlocalStorageForm } from "../../context/TodoContext";
 
 const History = () => {
-  return (
-    <div className="History">History</div>
-  )
-}
+  const [localStorageForm] = useLocalStorage<TlocalStorageForm[]>(
+    "form-data",
+    []
+  );
 
-export default History
+  const completedTasks = localStorageForm.filter((task) => task.isDone);
+
+  return (
+    <>
+      <h1 className="History">History Page</h1>
+      {completedTasks.map((task) => (
+        <div key={task.id}>
+          <p>Category: {task.category}</p>
+          <p>Content: {task.content}</p>
+          <p>Urgent: {task.isUrgent ? "Yes" : "No"}</p>
+          <p>Is Done: {task.isDone ? "Yes" : "No"}</p>
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default History;
