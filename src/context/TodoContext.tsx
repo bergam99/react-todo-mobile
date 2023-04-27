@@ -9,28 +9,28 @@ export type CategoryOfTodoFormType =
   | "cleaning"
   | "other";
 // FormData
-export type TodoFormType = {
+export type TlocalStorageForm = {
   id: number;
   content: string;
   category: CategoryOfTodoFormType | null;
   isUrgent: boolean;
-  doneDate: Date | null;
+  isDone: boolean;
 };
 type FormProviderProps = {
   children: React.ReactNode;
 };
 
 type FormContextValue = {
-  todoFormType: TodoFormType;
-  setTodoFormType: (data: TodoFormType) => void;
+  todoFormType: TlocalStorageForm;
+  setTodoFormType: (form: TlocalStorageForm) => void;
 };
 
-const INITIAL_FORMDATA: TodoFormType = {
+const INITIAL_FORMDATA: TlocalStorageForm = {
   id: Date.now(),
   content: "",
   category: null,
   isUrgent: false,
-  doneDate: null,
+  isDone: false,
 };
 
 const FORM_CONTEXT = createContext<FormContextValue>({
@@ -43,7 +43,7 @@ export const useFormContext = () => useContext(FORM_CONTEXT);
 export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
   // const [todoList, setTodoList] = useState<FormData[]>([]);
 
-  const [todoFormType, setTodoFormType] = useLocalStorage<TodoFormType>(
+  const [todoFormType, setTodoFormType] = useLocalStorage<TlocalStorageForm>(
     "form-data",
     INITIAL_FORMDATA
   );
