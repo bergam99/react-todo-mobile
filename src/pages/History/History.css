@@ -2,3 +2,45 @@
   padding: 107px 26px 100px 26px;
 
 }
+
+
+
+
+.History__space {
+  margin-bottom: 1.5vh;
+}
+
+
+
+.History__circle {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  border: 2px solid white;
+  overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.History__circle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-35deg) scaleX(-1);
+  width: 0.6em;
+  height: 0.2em;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+  opacity: 0;
+}
+
+
+.History__circle:checked::before {
+  opacity: 0;
+}
+
+.History__circle:not(:checked)::before {
+  opacity: 1;
+}

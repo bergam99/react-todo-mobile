@@ -1,5 +1,9 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+
+type FormProviderProps = {
+  children: React.ReactNode;
+};
 // FormType
 export type CategoryOfTodoFormType =
   | "shopping"
@@ -14,42 +18,114 @@ export type TlocalStorageForm = {
   content: string;
   category: CategoryOfTodoFormType | null;
   isUrgent: boolean;
-  isDone: boolean;
-};
-type FormProviderProps = {
-  children: React.ReactNode;
+  doneDate: Date | null;
 };
 
-type FormContextValue = {
-  todoFormType: TlocalStorageForm;
-  setTodoFormType: (form: TlocalStorageForm) => void;
-};
-
-const INITIAL_FORMDATA: TlocalStorageForm = {
+const DEFAULT_VALUE = {
   id: Date.now(),
   content: "",
   category: null,
   isUrgent: false,
-  isDone: false,
+  doneDate: null,
+};
+
+type FormContextValue = {
+  localStorageForm: TlocalStorageForm[];
+  setLocalStorageForm: (value: TlocalStorageForm[]) => void;
+  handleSubmit(event: React.FormEvent<HTMLFormElement>): void;
+  addTaskFormState: TlocalStorageForm;
+  setaddTaskFormState: React.Dispatch<React.SetStateAction<TlocalStorageForm>>;
+  CheckboxClicked: (task: TlocalStorageForm) => void;
 };
 
 const FORM_CONTEXT = createContext<FormContextValue>({
-  todoFormType: INITIAL_FORMDATA,
-  setTodoFormType: () => {},
+  localStorageForm: [],
+  setLocalStorageForm: () => {},
+  handleSubmit: () => {},
+  addTaskFormState: DEFAULT_VALUE,
+  setaddTaskFormState: () => {},
+  CheckboxClicked: () => {},
 });
 
 export const useFormContext = () => useContext(FORM_CONTEXT);
 
+// ========================== CONTEXT BODY ==========================
+
 export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
-  // const [todoList, setTodoList] = useState<FormData[]>([]);
+  const [addTaskFormState, setaddTaskFormState] =
+    useState<TlocalStorageForm>(DEFAULT_VALUE);
 
-  const [todoFormType, setTodoFormType] = useLocalStorage<TlocalStorageForm>(
-    "form-data",
-    INITIAL_FORMDATA
-  );
+  const [localStorageForm, setLocalStorageForm] = useLocalStorage<
+    TlocalStorageForm[]
+  >("form-data", []);
 
-  const value = { todoFormType, setTodoFormType };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
+    const newTask = {
+      ...addTaskFormState,
+    };
+    setLocalStorageForm([...localStorageForm, newTask]);
+    setaddTaskFormState(DEFAULT_VALUE);
+  };
+
+  const CheckboxClicked = (task: TlocalStorageForm) => {
+    const updatedForm = localStorageForm.map((form) => {
+      if (form.id === task.id) {
+        if (form.doneDate === null) {
+          // If doneDate is null, generate the current date
+          const currentDate = new Date();
+          return { ...form, doneDate: currentDate };
+        } else {
+          // If doneDate has a value, switch it to null
+          return { ...form, doneDate: null };
+        }
+      }
+      return form;
+    });
+
+    setLocalStorageForm(updatedForm);
+  };
+
+  // const CheckboxClicked = (task: TlocalStorageForm) => {
+  //   if (task.doneDate === null) {
+  //     // If doneDate is null, generate the current date
+  //     const currentDate = new Date();
+  //     task.doneDate = currentDate;
+  //   } else {
+  //     // If doneDate has a value, switch it to null
+  //     task.doneDate = null;
+  //   }
+
+  //   // Perform any additional operations or state updates here if needed
+  // };
+
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   // Generate the current date
+  //   const currentDate = new Date();
+  //   const formattedDate = currentDate.toISOString();
+  //   // Create a new task object with the generated date
+  //   const newTask = {
+  //     ...addTaskFormState,
+  //     doneDate: currentDate,
+  //   };
+  //   // Add the new task to the localStorageForm array
+  //   setLocalStorageForm([...localStorageForm, newTask]);
+  //   // Reset the addTaskFormState to DEFAULT_VALUE
+  //   setaddTaskFormState(DEFAULT_VALUE);
+  // };
+
+  const value = {
+    // states
+    localStorageForm,
+    setLocalStorageForm,
+    addTaskFormState,
+    setaddTaskFormState,
+    // functions
+    handleSubmit,
+    CheckboxClicked,
+  };
   return (
     <FORM_CONTEXT.Provider value={value}>{children}</FORM_CONTEXT.Provider>
   );
