@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import { TlocalStorageForm } from "../../context/TodoContext";
+import { TlocalStorageForm, useFormContext } from "../../context/TodoContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const home = () => {
-  const [localStorageForm] = useLocalStorage<TlocalStorageForm[]>(
-    "form-data",
-    []
-  );
+  const { localStorageForm, CheckboxClicked } = useFormContext();
+  const incompletedTasks = localStorageForm.filter((task) => !task.doneDate);
 
   return (
     <>
       <div className="Home">
-        {localStorageForm.map((task) => (
-          <div key={task.id} className="Home__space-buttom">
-            <input className="Home__checkbox-round" type="checkbox" />
+        {incompletedTasks.map((task) => (
+          <div key={task.id} className="Home__space">
+            <input
+              className="Home__checkbox-round"
+              type="checkbox"
+              onChange={() => CheckboxClicked(task)}
+            />
             &nbsp; &nbsp;
             <span>{task.isUrgent ? "⚠️" : ""}</span>
             &nbsp;

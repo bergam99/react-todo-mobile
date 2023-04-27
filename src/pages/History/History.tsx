@@ -1,28 +1,34 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./History.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { TlocalStorageForm } from "../../context/TodoContext";
+import { TlocalStorageForm, useFormContext } from "../../context/TodoContext";
 
 const History = () => {
-  const [localStorageForm] = useLocalStorage<TlocalStorageForm[]>(
-    "form-data",
-    []
-  );
+  const { localStorageForm, CheckboxClicked } = useFormContext();
 
-  const completedTasks = localStorageForm.filter((task) => task.isDone);
+  const completedTasks = localStorageForm.filter((task) => task.doneDate);
 
   return (
-    <>
-      <h1 className="History">History Page</h1>
-      {completedTasks.map((task) => (
-        <div key={task.id}>
-          <p>Category: {task.category}</p>
-          <p>Content: {task.content}</p>
-          <p>Urgent: {task.isUrgent ? "Yes" : "No"}</p>
-          <p>Is Done: {task.isDone ? "Yes" : "No"}</p>
-        </div>
-      ))}
-    </>
+    <Fragment>
+      <section className="History">
+        <p className="History__space">Historique des tâches :</p>
+        {completedTasks.map((task) => (
+          <div key={task.id} className="History__space">
+            <input
+              className="History__circle"
+              type="checkbox"
+              onChange={() => CheckboxClicked(task)}
+            />
+            &nbsp; &nbsp;
+            <span>{task.isUrgent ? "⚠️" : ""}</span>
+            &nbsp;
+            <span>{task.category}</span>
+            &nbsp;
+            <span>{task.content}</span>
+          </div>
+        ))}
+      </section>
+    </Fragment>
   );
 };
 
