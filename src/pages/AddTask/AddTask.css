@@ -1,58 +1,99 @@
 .AddTask{
   padding: 107px 26px 100px 26px;
-
 }
 
-/* .AddTask__icon_input{
-  opacity: 0;
-} */
-
+/**************** textarea ****************/
 .AddTask__textarea::placeholder {
   position: absolute;
   top: 10px;
   left: 10px;
 }
+
 .AddTask__textarea {
-  line-height: 20px; /* ajuste la hauteur de ligne */
+  line-height: 20px; 
   border: none;
   background-color:var(--color-light-navy);
   margin-top: 28px;
   margin-bottom: 31px;
   width: 100%;
   height: 20vh;
-
 }
 
 .AddTask__textarea:focus {
-  outline: none; /* supprime la mise en évidence du focus */
+  outline: none;
 }
+
+/**************** URGENT CHECKBOX ****************/
+
+
+.AddTask__checkbox {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  border:2px solid white;
+  overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+  margin-right: 1vw;
+}
+
+.AddTask__checkbox::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-35deg) scaleX(-1);
+  width: 0.6em;
+  height: 0.2em;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+  opacity: 0;
+}
+
+.AddTask__checkbox:checked::before {
+  opacity: 0;
+}
+
+.AddTask__checkbox:not(:checked)::before{
+  opacity: 1;
+  /* background-color:var(--color-pink);
+  padding: 1.5em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%; */
+}
+
+
+
+/**************** icons ****************/
 .AddTask__icons {
   display: flex;
   padding: 30px 0 38px 0;
   justify-content: center;
   gap: 16px;
-}
-
+} 
+ 
 .AddTask__icon_label, .AddTask__icon_input{
   padding: 6px 16px 6px 16px;
   border-radius: 50px;
 }
 
-/* unchecked label styles */
 .AddTask__icon_label {
-  /* ... other styles ... */
   background-color: var(--color-light-navy);
 }
 
-/* checked label styles */
-.AddTask__icon_label input[type="checkbox"]:checked + span {
-  background-color: red;
-}
-
-/* toggle */
 .AddTask__icon_label:hover {
   background-color: var(--color-yellow);
+
 }
 .AddTask__icon_label a:active {
   background-color: var(--color-yellow);
+}
+
+.AddTask__icon_input:checked + .AddTask__icon_label {
+  background-color: var(--color-yellow);
+  
+
+
 }

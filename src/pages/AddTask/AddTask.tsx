@@ -1,16 +1,9 @@
-import { useState } from "react";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import "./AddTask.css";
-import { TlocalStorageForm, useFormContext } from "../../context/TodoContext";
+import { useFormContext } from "../../context/TodoContext";
 
 const AddTask = () => {
-  const {
-    handleSubmit,
-    addTaskFormState,
-    setaddTaskFormState,
-    localStorageForm,
-    setLocalStorageForm,
-  } = useFormContext();
+  const { handleSubmit, addTaskFormState, setaddTaskFormState } =
+    useFormContext();
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,10 +12,18 @@ const AddTask = () => {
     setaddTaskFormState((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
+  const handleRadioChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, id } = event.target;
+    setaddTaskFormState((prevFormData) => ({ ...prevFormData, [name]: id }));
+  };
+
+  console.log(addTaskFormState);
   return (
     <>
       <main className="AddTask">
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={handleSubmit}>
           <label>
             Sélectionnez votre catégorie* :
             <div className="AddTask__icons">
@@ -35,7 +36,7 @@ const AddTask = () => {
                   value="🛍️"
                   required
                   checked={addTaskFormState.category === "shopping"}
-                  onChange={handleChange}
+                  onChange={handleRadioChange}
                 />
                 🛍️
               </label>
@@ -46,9 +47,8 @@ const AddTask = () => {
                   type="radio"
                   name="category"
                   value="💊️"
-                  required
                   checked={addTaskFormState.category === "health"}
-                  onChange={handleChange}
+                  onChange={handleRadioChange}
                 />
                 💊️
               </label>
@@ -59,9 +59,8 @@ const AddTask = () => {
                   type="radio"
                   name="category"
                   value="💼"
-                  required
                   checked={addTaskFormState.category === "work"}
-                  onChange={handleChange}
+                  onChange={handleRadioChange}
                 />
                 💼
               </label>
@@ -72,9 +71,8 @@ const AddTask = () => {
                   type="radio"
                   name="category"
                   value="💸"
-                  required
                   checked={addTaskFormState.category === "bills"}
-                  onChange={handleChange}
+                  onChange={handleRadioChange}
                 />
                 💸
               </label>
@@ -85,22 +83,20 @@ const AddTask = () => {
                   type="radio"
                   name="category"
                   value="🧼"
-                  required
                   checked={addTaskFormState.category === "cleaning"}
-                  onChange={handleChange}
+                  onChange={handleRadioChange}
                 />
                 🧼
               </label>
-              <label htmlFor="cleaning" className="AddTask__icon_label">
+              <label htmlFor="other" className="AddTask__icon_label">
                 <input
                   className="AddTask__icon_input"
-                  id="cleaning"
+                  id="other"
                   type="radio"
                   name="category"
                   value="🤷‍♀️"
-                  required
                   checked={addTaskFormState.category === "other"}
-                  onChange={handleChange}
+                  onChange={handleRadioChange}
                 />
                 🤷‍♀️
               </label>
@@ -110,7 +106,6 @@ const AddTask = () => {
             Quelle tâche avez vous à effectuer ?
             <textarea
               className="AddTask__textarea"
-              // type="textarea"
               placeholder="Exemple : Faire les courses"
               name="content"
               required
@@ -118,12 +113,12 @@ const AddTask = () => {
               onChange={handleChange}
             />
           </label>
-          <br />
-
+          <br />s{" "}
           <input
             type="checkbox"
             name="isUrgent"
             checked={addTaskFormState.isUrgent}
+            className="AddTask__checkbox AddTask__input"
             onChange={(event) =>
               setaddTaskFormState((prevFormData) => ({
                 ...prevFormData,
@@ -133,7 +128,6 @@ const AddTask = () => {
           />
           <label>La tâche est urgente ⚠️</label>
           <br />
-
           <button type="submit">Submit</button>
         </form>
       </main>
