@@ -11,22 +11,32 @@ const History = () => {
   return (
     <Fragment>
       <section className="History">
-        <p className="History__space">Historique des tâches :</p>
-        {completedTasks.map((task) => (
-          <div key={task.id} className="History__space">
-            <input
-              className="History__circle"
-              type="checkbox"
-              onChange={() => CheckboxClicked(task)}
-            />
-            &nbsp; &nbsp;
-            <span>{task.isUrgent ? "⚠️" : ""}</span>
-            &nbsp;
-            <span>{task.category}</span>
-            &nbsp;
-            <span>{task.content}</span>
+        {completedTasks.length === 0 ? (
+          <div>
+            <p>Votre historique est vide 😬</p>
+            <button>Créer une tâche</button>
           </div>
-        ))}
+        ) : (
+          <div>
+            {" "}
+            <p className="History__space">Historique des tâches :</p>
+            {completedTasks.map((task) => (
+              <div key={task.id} className="History__space">
+                <input
+                  className="History__circle"
+                  type="checkbox"
+                  onChange={() => CheckboxClicked(task)}
+                />
+                &nbsp; &nbsp;
+                <span>{task.isUrgent ? "⚠️" : ""}</span>
+                &nbsp;
+                <span>{task.category}</span>
+                &nbsp;
+                <span>{task.content}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
     </Fragment>
   );
