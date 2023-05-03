@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "./History.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { TlocalStorageForm, useFormContext } from "../../context/TodoContext";
+import Button from "../../components/Button/Button";
 
 const History = () => {
   const { localStorageForm, CheckboxClicked } = useFormContext();
@@ -13,8 +14,11 @@ const History = () => {
       <section className="History">
         {completedTasks.length === 0 ? (
           <div>
-            <p>Votre historique est vide 😬</p>
-            <button>Créer une tâche</button>
+            <Button
+              ExplainText={"Votre historique est vide 😬"}
+              ButtonText="Créer une tâche"
+              ButtonLink="/AddTask"
+            />
           </div>
         ) : (
           <div>

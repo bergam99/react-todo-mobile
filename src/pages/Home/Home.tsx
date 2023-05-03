@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./Home.css";
 import { TlocalStorageForm, useFormContext } from "../../context/TodoContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import Button from "../../components/Button/Button";
 
 const home = () => {
   const { localStorageForm, CheckboxClicked } = useFormContext();
@@ -12,8 +13,11 @@ const home = () => {
       <section className="Home">
         {incompletedTasks.length === 0 ? (
           <div>
-            <p>Aucune tâche pour le moment 🙌</p>
-            <button>Créer une tâche</button>
+            <Button
+              ExplainText={"Aucune tâche pour le moment 🙌"}
+              ButtonText="Créer une tâche"
+              ButtonLink="/AddTask"
+            />
           </div>
         ) : (
           <div>

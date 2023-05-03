@@ -1,5 +1,6 @@
 .Home{
     padding: 107px 26px 100px 26px;
+    flex: 1;
 }
 
 .Home__checkbox-round {
