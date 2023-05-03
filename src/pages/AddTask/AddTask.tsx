@@ -29,7 +29,7 @@ const AddTask = () => {
     { picto: "🤷‍♀️", name: "🤷‍♀️" },
   ];
 
-  console.log(addTaskFormState);
+  // console.log(addTaskFormState);
   return (
     <>
       <main className="AddTask">
@@ -37,9 +37,9 @@ const AddTask = () => {
           {/* ========================== ICON ======================= */}
 
           <p> Sélectionnez votre catégorie* :</p>
-          <div>
+          <div className="AddTask__flex">
             {CATEGORIES.map((category, index) => (
-              <div key={index}>
+              <div key={index} className="circle">
                 <input
                   type="radio"
                   id={category.name}
@@ -47,7 +47,9 @@ const AddTask = () => {
                   checked={addTaskFormState.category === category.name}
                   onChange={handleRadioChange}
                 />
-                <label htmlFor={category.name}>{category.picto}</label>
+                <label className="circle-label" htmlFor={category.name}>
+                  {category.picto}
+                </label>
               </div>
             ))}
           </div>

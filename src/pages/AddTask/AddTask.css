@@ -108,7 +108,7 @@
 
 /* cat */
 
-.category-label{
+/* .category-label{
   margin-bottom: 2.3vh;
 }
 
@@ -119,6 +119,12 @@
   gap: 10px;
   margin-bottom: 3vh;
 
+} */
+.AddTask__flex{
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  margin: 2.3vh 0 2.3vh;
 }
 
 
