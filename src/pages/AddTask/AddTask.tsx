@@ -19,89 +19,39 @@ const AddTask = () => {
     setaddTaskFormState((prevFormData) => ({ ...prevFormData, [name]: id }));
   };
 
+  // CAT
+  const CATEGORIES = [
+    { picto: "🛍️", name: "🛍️" },
+    { picto: "💊️", name: "💊️" },
+    { picto: "💼", name: "💼" },
+    { picto: "💸", name: "💸" },
+    { picto: "🧼", name: "🧼" },
+    { picto: "🤷‍♀️", name: "🤷‍♀️" },
+  ];
+
   console.log(addTaskFormState);
   return (
     <>
       <main className="AddTask">
         <form onSubmit={handleSubmit}>
-          <label>
-            Sélectionnez votre catégorie* :
-            <div className="AddTask__icons">
-              <label htmlFor="shopping" className="AddTask__icon_label">
+          {/* ========================== ICON ======================= */}
+
+          <p> Sélectionnez votre catégorie* :</p>
+          <div>
+            {CATEGORIES.map((category, index) => (
+              <div key={index}>
                 <input
-                  className="AddTask__icon_input"
-                  id="shopping"
                   type="radio"
+                  id={category.name}
                   name="category"
-                  value="🛍️"
-                  required
-                  checked={addTaskFormState.category === "shopping"}
+                  checked={addTaskFormState.category === category.name}
                   onChange={handleRadioChange}
                 />
-                🛍️
-              </label>
-              <label htmlFor="health" className="AddTask__icon_label">
-                <input
-                  className="AddTask__icon_input"
-                  id="health"
-                  type="radio"
-                  name="category"
-                  value="💊️"
-                  checked={addTaskFormState.category === "health"}
-                  onChange={handleRadioChange}
-                />
-                💊️
-              </label>
-              <label htmlFor="work" className="AddTask__icon_label">
-                <input
-                  className="AddTask__icon_input"
-                  id="work"
-                  type="radio"
-                  name="category"
-                  value="💼"
-                  checked={addTaskFormState.category === "work"}
-                  onChange={handleRadioChange}
-                />
-                💼
-              </label>
-              <label htmlFor="bills" className="AddTask__icon_label">
-                <input
-                  className="AddTask__icon_input"
-                  id="bills"
-                  type="radio"
-                  name="category"
-                  value="💸"
-                  checked={addTaskFormState.category === "bills"}
-                  onChange={handleRadioChange}
-                />
-                💸
-              </label>
-              <label htmlFor="cleaning" className="AddTask__icon_label">
-                <input
-                  className="AddTask__icon_input"
-                  id="cleaning"
-                  type="radio"
-                  name="category"
-                  value="🧼"
-                  checked={addTaskFormState.category === "cleaning"}
-                  onChange={handleRadioChange}
-                />
-                🧼
-              </label>
-              <label htmlFor="other" className="AddTask__icon_label">
-                <input
-                  className="AddTask__icon_input"
-                  id="other"
-                  type="radio"
-                  name="category"
-                  value="🤷‍♀️"
-                  checked={addTaskFormState.category === "other"}
-                  onChange={handleRadioChange}
-                />
-                🤷‍♀️
-              </label>
-            </div>
-          </label>
+                <label htmlFor={category.name}>{category.picto}</label>
+              </div>
+            ))}
+          </div>
+          {/* ========================== TEXTAREA ======================= */}
           <label>
             Quelle tâche avez vous à effectuer ?
             <textarea
@@ -113,7 +63,9 @@ const AddTask = () => {
               onChange={handleChange}
             />
           </label>
-          <br />s{" "}
+          <br />
+          {/* ========================== URGENT ======================= */}
+
           <input
             type="checkbox"
             name="isUrgent"

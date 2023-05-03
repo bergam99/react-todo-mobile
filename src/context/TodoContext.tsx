@@ -78,7 +78,9 @@ export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
           return { ...form, doneDate: currentDate };
         } else {
           // If doneDate has a value, switch it to null
-          return { ...form, doneDate: null };
+          if (form.id === task.id) {
+            return { ...form, doneDate: null };
+          }
         }
       }
       return form;

@@ -1,0 +1,22 @@
+.Button {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* height: 80vh; */
+    /* flex-direction: column; */
+    /* text-align: center; */
+    text-align: center;
+    margin-top: 25vh;
+}
+
+.Button__style {
+    height: 48px;
+    width: 248px;
+    background-color: var(--color-blue);
+    border-radius: 50px
+}
+
+.Button__margin-button {
+    margin-bottom: 1em;
+
+}
