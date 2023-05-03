@@ -25,17 +25,26 @@
 
 /**************** URGENT CHECKBOX ****************/
 
+input.AddTask__checkbox:after {
+  position: absolute;
+  content: "";
+  background-color: var(--color-pink);
+  height: 100%;
+  width: 100%;
+}
 
 .AddTask__checkbox {
   position: relative;
   width: 1.5em;
   height: 1.5em;
   border-radius: 50%;
-  border:2px solid white;
+  /* border:2px solid white; */
+  background-color:var(--color-light-navy);
   overflow: hidden;
   appearance: none;
   -webkit-appearance: none;
   margin-right: 1vw;
+  
 }
 
 .AddTask__checkbox::before {
@@ -48,21 +57,17 @@
   height: 0.2em;
   border-bottom: 2px solid #fff;
   border-right: 2px solid #fff;
+  z-index: 1;
+}
+
+.AddTask__checkbox::before, .AddTask__checkbox::after{
   opacity: 0;
 }
 
-.AddTask__checkbox:checked::before {
-  opacity: 0;
-}
-
-.AddTask__checkbox:not(:checked)::before{
+.AddTask__checkbox:checked::before,.AddTask__checkbox:checked::after {
   opacity: 1;
-  /* background-color:var(--color-pink);
-  padding: 1.5em;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%; */
 }
+
 
 
 
@@ -105,21 +110,6 @@
   background-color: var(--color-yellow);
 }
 
-
-/* cat */
-
-/* .category-label{
-  margin-bottom: 2.3vh;
-}
-
-.category-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 3vh;
-
-} */
 .AddTask__flex{
   display: flex;
   justify-content: center;
@@ -175,4 +165,30 @@
 /* hide radio button */
 .AddTask__icon_input{
   display: none;
+}
+
+
+/* button submit */
+.AddTask__fix {
+  position: relative;
+}
+
+.AddTask__submit {
+  background-color: var(--color-blue);
+  height: 48px;
+  width: 248px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 125px 0;
+  position: fixed;
+  z-index: 9999;
+  bottom: 25px;
+}
+
+
+.AddTask__flex {
+  display: flex;
+  justify-content: center;
 }

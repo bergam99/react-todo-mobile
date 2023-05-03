@@ -72,7 +72,7 @@ const AddTask = () => {
             type="checkbox"
             name="isUrgent"
             checked={addTaskFormState.isUrgent}
-            className="AddTask__checkbox AddTask__input"
+            className="AddTask__checkbox"
             onChange={(event) =>
               setaddTaskFormState((prevFormData) => ({
                 ...prevFormData,
@@ -82,7 +82,11 @@ const AddTask = () => {
           />
           <label>La tâche est urgente ⚠️</label>
           <br />
-          <button type="submit">Submit</button>
+          <div className="AddTask__flex AddTask__fix">
+            <button type="submit" className="AddTask__submit">
+              Valider ma tâche
+            </button>
+          </div>
         </form>
       </main>
     </>
@@ -90,3 +94,17 @@ const AddTask = () => {
 };
 
 export default AddTask;
+
+//     <!-- Not Edit mode -->
+{
+  /* <div class="flex fix" *ngIf="!isEditMode">
+<button class="valider" type="submit" [style.opacity]="myForm.valid ? 1 : 0.5" [disabled]="!myForm.valid">
+  Valider ma tâche</button>
+</div>
+
+<!-- Edit mode -->
+<div class="flex fix" *ngIf="isEditMode">
+<button (click)="onSave()" class="valider" type="submit" [style.opacity]="myForm.valid ? 1 : 0.5"
+  [disabled]="!myForm.valid">Modifier ma tâche</button>
+</div> */
+}
