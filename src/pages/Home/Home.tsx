@@ -4,10 +4,18 @@ import { TlocalStorageForm, useFormContext } from "../../context/TodoContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Button from "../../components/Button/Button";
 
-const home = () => {
+type TaskItemProps = {
+  task: TlocalStorageForm;
+  onEdit: (taskId: number) => void;
+};
+
+const home: React.FC<TaskItemProps> = ({ task, onEdit }) => {
   const { localStorageForm, CheckboxClicked } = useFormContext();
   const incompletedTasks = localStorageForm.filter((task) => !task.doneDate);
 
+  const handleEditClick = () => {
+    onEdit(task.id); // Pass the task ID to the parent component to trigger the edit mode
+  };
   return (
     <Fragment>
       <section className="Home">
@@ -27,6 +35,7 @@ const home = () => {
                   className="Home__checkbox-round"
                   type="checkbox"
                   onChange={() => CheckboxClicked(task)}
+                  onClick={handleEditClick}
                 />
                 &nbsp; &nbsp;
                 <span>{task.isUrgent ? "⚠️" : ""}</span>
