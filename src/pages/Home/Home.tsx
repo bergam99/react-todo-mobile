@@ -38,11 +38,13 @@ const home: React.FC<TaskItemProps> = ({ task, onEdit }) => {
                   onClick={handleEditClick}
                 />
                 &nbsp; &nbsp;
-                <span>{task.isUrgent ? "⚠️" : ""}</span>
-                &nbsp;
-                <span>{task.category}</span>
-                &nbsp;
-                <span>{task.content}</span>
+                <button>
+                  <span>{task.isUrgent ? "⚠️" : ""}</span>
+                  &nbsp;
+                  <span>{task.category}</span>
+                  &nbsp;
+                  <span>{task.content}</span>
+                </button>
               </div>
             ))}
           </div>

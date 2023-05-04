@@ -89,35 +89,6 @@ export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
     setLocalStorageForm(updatedForm);
   };
 
-  // const CheckboxClicked = (task: TlocalStorageForm) => {
-  //   if (task.doneDate === null) {
-  //     // If doneDate is null, generate the current date
-  //     const currentDate = new Date();
-  //     task.doneDate = currentDate;
-  //   } else {
-  //     // If doneDate has a value, switch it to null
-  //     task.doneDate = null;
-  //   }
-
-  //   // Perform any additional operations or state updates here if needed
-  // };
-
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   // Generate the current date
-  //   const currentDate = new Date();
-  //   const formattedDate = currentDate.toISOString();
-  //   // Create a new task object with the generated date
-  //   const newTask = {
-  //     ...addTaskFormState,
-  //     doneDate: currentDate,
-  //   };
-  //   // Add the new task to the localStorageForm array
-  //   setLocalStorageForm([...localStorageForm, newTask]);
-  //   // Reset the addTaskFormState to DEFAULT_VALUE
-  //   setaddTaskFormState(DEFAULT_VALUE);
-  // };
-
   const value = {
     // states
     localStorageForm,

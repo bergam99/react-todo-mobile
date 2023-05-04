@@ -7,7 +7,10 @@ import Button from "../../components/Button/Button";
 const History = () => {
   const { localStorageForm, CheckboxClicked } = useFormContext();
 
-  const completedTasks = localStorageForm.filter((task) => task.doneDate);
+  // const completedTasks = localStorageForm.filter((task) => task.doneDate);
+  const completedTasks = localStorageForm.filter(
+    (task) => task.doneDate !== null
+  );
 
   return (
     <Fragment>
