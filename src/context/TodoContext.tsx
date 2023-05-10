@@ -64,6 +64,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
 
     const newTask = {
       ...addTaskFormState,
+      id: Date.now(),
     };
     setLocalStorageForm([...localStorageForm, newTask]);
     setaddTaskFormState(DEFAULT_VALUE);
