@@ -29,13 +29,13 @@ const home: React.FC<TaskItemProps> = ({ task, onEdit }) => {
           </div>
         ) : (
           <div>
-            {incompletedTasks.map((task) => (
-              <div key={task.id} className="Home__space">
+            {incompletedTasks.map((task, index) => (
+              <div key={index} data-key={index} className="Home__space">
                 <input
                   className="Home__checkbox-round"
                   type="checkbox"
                   onChange={() => CheckboxClicked(task)}
-                  onClick={handleEditClick}
+                  // onClick={handleEditClick}
                 />
                 &nbsp; &nbsp;
                 <button>
